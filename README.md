@@ -1,36 +1,94 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# NgeMood - Frontend Client 🎨
 
-## Getting Started
+Aplikasi web modern (Client-Side) yang dibangun menggunakan **Next.js
+16**.\
+NgeMood menyediakan antarmuka yang **responsif, estetis, dan
+interaktif** untuk membantu pengguna memantau dan mengekspresikan mood
+harian mereka dengan dukungan AI.
 
-First, run the development server:
+------------------------------------------------------------------------
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+## 📑 Table of Contents
+
+-   [Galeri Aplikasi](#-galeri-aplikasi)
+-   [Instalasi](#️-instalasi)
+-   [Development](#-development)
+-   [Struktur Halaman](#-struktur-halaman)
+
+------------------------------------------------------------------------
+
+## 📸 Galeri Aplikasi
+
+### 🔐 Autentikasi
+
+![Login Web](screenshots/login-web.png)\
+![Login Mobile](screenshots/login.png)
+
+![Register Web](screenshots/register-web.png)\
+![Register Mobile](screenshots/register.png)
+
+------------------------------------------------------------------------
+
+### 🏠 Dashboard Utama
+
+![Dashboard Web](screenshots/dashboard-web.png)\
+![Dashboard Mobile](screenshots/dashboard.png)
+
+------------------------------------------------------------------------
+
+### 🤖 Fitur AI
+
+![Face Check-in Web](screenshots/face-checkin-web.png)\
+![Face Check-in Mobile](screenshots/face-checkin.png)
+
+![Face Check-in Result Web](screenshots/face-checkin-result-web.png)\
+![Face Check-in Result Mobile](screenshots/face-checkin-result.png)
+
+------------------------------------------------------------------------
+
+### 📔 Jurnal & Riwayat
+
+![Journal Web](screenshots/journal-web.png)\
+![Journal Mobile](screenshots/journal.png)
+
+![History Web](screenshots/history-web.png)\
+![History Mobile](screenshots/history.png)
+
+------------------------------------------------------------------------
+
+## 🛠️ Instalasi
+
+``` bash
+cd frontend
+npm install
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Buat `.env.local`:
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+``` env
+NEXT_PUBLIC_API_URL=http://localhost:8000
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+------------------------------------------------------------------------
 
-## Learn More
+## 🚀 Development
 
-To learn more about Next.js, take a look at the following resources:
+``` bash
+npm run dev
+```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+Akses: http://localhost:3000
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+------------------------------------------------------------------------
 
-## Deploy on Vercel
+## 📂 Struktur Halaman (`app/`)
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+-   `/login`, `/register`
+-   `/dashboard`
+-   `/face-checkin`
+-   `/journal`
+-   `/history`
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+------------------------------------------------------------------------
+
+✨ NgeMood Frontend Client
