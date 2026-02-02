@@ -19,51 +19,68 @@ harian mereka dengan dukungan AI.
 
 ## 📸 Galeri Aplikasi
 
+> Semua gambar berada di folder `frontend/screenshots/`
+
 ### 🔐 Autentikasi
 
-![Login Web](screenshots/login-web.png)\
-![Login Mobile](screenshots/login.png)
+  Login (Web)                      Login (Mobile)
+  -------------------------------- ----------------------------
+  ![](screenshots/login-web.png)   ![](screenshots/login.png)
 
-![Register Web](screenshots/register-web.png)\
-![Register Mobile](screenshots/register.png)
+  Register (Web)                      Register (Mobile)
+  ----------------------------------- -------------------------------
+  ![](screenshots/register-web.png)   ![](screenshots/register.png)
 
 ------------------------------------------------------------------------
 
 ### 🏠 Dashboard Utama
 
-![Dashboard Web](screenshots/dashboard-web.png)\
-![Dashboard Mobile](screenshots/dashboard.png)
+  Dashboard (Web)                      Dashboard (Mobile)
+  ------------------------------------ --------------------------------
+  ![](screenshots/dashboard-web.png)   ![](screenshots/dashboard.png)
 
 ------------------------------------------------------------------------
 
-### 🤖 Fitur AI
+### 🤖 Fitur AI (Face Check-in)
 
-![Face Check-in Web](screenshots/face-checkin-web.png)\
-![Face Check-in Mobile](screenshots/face-checkin.png)
+  -------------------------------------------------------------------------------
+  Face Check-in (Web)                     Face Check-in (Mobile)
+  --------------------------------------- ---------------------------------------
+  ![](screenshots/face-checkin-web.png)   ![](screenshots/face-checkin.png)
 
-![Face Check-in Result Web](screenshots/face-checkin-result-web.png)\
-![Face Check-in Result Mobile](screenshots/face-checkin-result.png)
+  -------------------------------------------------------------------------------
+
+  -----------------------------------------------------------------------------------------
+  Hasil Deteksi (Web)                            Hasil Deteksi (Mobile)
+  ---------------------------------------------- ------------------------------------------
+  ![](screenshots/face-checkin-result-web.png)   ![](screenshots/face-checkin-result.png)
+
+  -----------------------------------------------------------------------------------------
 
 ------------------------------------------------------------------------
 
 ### 📔 Jurnal & Riwayat
 
-![Journal Web](screenshots/journal-web.png)\
-![Journal Mobile](screenshots/journal.png)
+  Journal (Web)                      Journal (Mobile)
+  ---------------------------------- ------------------------------
+  ![](screenshots/journal-web.png)   ![](screenshots/journal.png)
 
-![History Web](screenshots/history-web.png)\
-![History Mobile](screenshots/history.png)
+  History (Web)                      History (Mobile)
+  ---------------------------------- ------------------------------
+  ![](screenshots/history-web.png)   ![](screenshots/history.png)
 
 ------------------------------------------------------------------------
 
 ## 🛠️ Instalasi
+
+Masuk ke folder frontend:
 
 ``` bash
 cd frontend
 npm install
 ```
 
-Buat `.env.local`:
+Konfigurasi environment (`.env.local`):
 
 ``` env
 NEXT_PUBLIC_API_URL=http://localhost:8000
@@ -77,18 +94,20 @@ NEXT_PUBLIC_API_URL=http://localhost:8000
 npm run dev
 ```
 
-Akses: http://localhost:3000
+Akses melalui browser:\
+http://localhost:3000
 
 ------------------------------------------------------------------------
 
 ## 📂 Struktur Halaman (`app/`)
 
--   `/login`, `/register`
--   `/dashboard`
--   `/face-checkin`
--   `/journal`
--   `/history`
+-   `/login` & `/register` --- Autentikasi (Split Screen)
+-   `/dashboard` --- Weekly Vibe & navigasi utama
+-   `/face-checkin` --- Deteksi wajah (kamera auto-off)
+-   `/journal` --- Chat jurnal & AI
+-   `/history` --- Grafik mood & riwayat aktivitas
 
 ------------------------------------------------------------------------
 
-✨ NgeMood Frontend Client
+✨ **NgeMood Frontend Client**\
+UI modern untuk pengalaman emosional yang lebih baik.
