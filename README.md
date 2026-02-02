@@ -12,6 +12,7 @@ harian mereka dengan dukungan AI.
 
 -   [Galeri Aplikasi](#-galeri-aplikasi)
 -   [Instalasi](#️-instalasi)
+-   [Konfigurasi Environment](#️-konfigurasi-environment)
 -   [Development](#-development)
 -   [Struktur Halaman](#-struktur-halaman)
 
@@ -19,55 +20,46 @@ harian mereka dengan dukungan AI.
 
 ## 📸 Galeri Aplikasi
 
-> Semua gambar berada di folder `frontend/screenshots/`
+*(Semua screenshot tersimpan di folder `screenshots/`)*
 
-### 🔐 Autentikasi
+### A. Autentikasi
 
-  Login (Web)                      Login (Mobile)
-  -------------------------------- ----------------------------
-  ![](screenshots/login-web.png)   ![](screenshots/login.png)
+  ---------------------------------------------------------------------------------------------------------------------------------
+            Login (Web)                   Login (Mobile)                  Register (Web)                   Register (Mobile)
+  -------------------------------- ---------------------------- ----------------------------------- -------------------------------
+   ![](screenshots/login-web.png)   ![](screenshots/login.png)   ![](screenshots/register-web.png)   ![](screenshots/register.png)
 
-  Register (Web)                      Register (Mobile)
-  ----------------------------------- -------------------------------
-  ![](screenshots/register-web.png)   ![](screenshots/register.png)
+  ---------------------------------------------------------------------------------------------------------------------------------
 
 ------------------------------------------------------------------------
 
-### 🏠 Dashboard Utama
+### B. Dashboard Utama
 
-  Dashboard (Web)                      Dashboard (Mobile)
+            Dashboard (Web)                   Dashboard (Mobile)
   ------------------------------------ --------------------------------
-  ![](screenshots/dashboard-web.png)   ![](screenshots/dashboard.png)
+   ![](screenshots/dashboard-web.png)   ![](screenshots/dashboard.png)
 
 ------------------------------------------------------------------------
 
-### 🤖 Fitur AI (Face Check-in)
+### C. Fitur AI -- Face Check-in
 
-  -------------------------------------------------------------------------------
-  Face Check-in (Web)                     Face Check-in (Mobile)
-  --------------------------------------- ---------------------------------------
-  ![](screenshots/face-checkin-web.png)   ![](screenshots/face-checkin.png)
+  ---------------------------------------------------------------------------------------------------------------------------------------------------------------------
+            Face Check-in (Web)                 Face Check-in (Mobile)                     Hasil Deteksi (Web)                         Hasil Deteksi (Mobile)
+  --------------------------------------- ----------------------------------- ---------------------------------------------- ------------------------------------------
+   ![](screenshots/face-checkin-web.png)   ![](screenshots/face-checkin.png)   ![](screenshots/face-checkin-result-web.png)   ![](screenshots/face-checkin-result.png)
 
-  -------------------------------------------------------------------------------
-
-  -----------------------------------------------------------------------------------------
-  Hasil Deteksi (Web)                            Hasil Deteksi (Mobile)
-  ---------------------------------------------- ------------------------------------------
-  ![](screenshots/face-checkin-result-web.png)   ![](screenshots/face-checkin-result.png)
-
-  -----------------------------------------------------------------------------------------
+  ---------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 ------------------------------------------------------------------------
 
-### 📔 Jurnal & Riwayat
+### D. Jurnal & Riwayat
 
-  Journal (Web)                      Journal (Mobile)
-  ---------------------------------- ------------------------------
-  ![](screenshots/journal-web.png)   ![](screenshots/journal.png)
+  -----------------------------------------------------------------------------------------------------------------------------------
+            Journal (Web)                   Journal (Mobile)                  History (Web)                   History (Mobile)
+  ---------------------------------- ------------------------------ ---------------------------------- ------------------------------
+   ![](screenshots/journal-web.png)   ![](screenshots/journal.png)   ![](screenshots/history-web.png)   ![](screenshots/history.png)
 
-  History (Web)                      History (Mobile)
-  ---------------------------------- ------------------------------
-  ![](screenshots/history-web.png)   ![](screenshots/history.png)
+  -----------------------------------------------------------------------------------------------------------------------------------
 
 ------------------------------------------------------------------------
 
@@ -80,7 +72,11 @@ cd frontend
 npm install
 ```
 
-Konfigurasi environment (`.env.local`):
+------------------------------------------------------------------------
+
+## ⚙️ Konfigurasi Environment
+
+Buat file `.env.local` di dalam folder `frontend`:
 
 ``` env
 NEXT_PUBLIC_API_URL=http://localhost:8000
@@ -90,22 +86,34 @@ NEXT_PUBLIC_API_URL=http://localhost:8000
 
 ## 🚀 Development
 
+Jalankan server development:
+
 ``` bash
 npm run dev
 ```
 
-Akses melalui browser:\
-http://localhost:3000
+Buka di browser:
+
+    http://localhost:3000
 
 ------------------------------------------------------------------------
 
 ## 📂 Struktur Halaman (`app/`)
 
--   `/login` & `/register` --- Autentikasi (Split Screen)
--   `/dashboard` --- Weekly Vibe & navigasi utama
--   `/face-checkin` --- Deteksi wajah (kamera auto-off)
--   `/journal` --- Chat jurnal & AI
--   `/history` --- Grafik mood & riwayat aktivitas
+-   `/login` & `/register`\
+    Halaman autentikasi (Split Screen)
+
+-   `/dashboard`\
+    Weekly Vibe & navigasi utama
+
+-   `/face-checkin`\
+    Deteksi wajah (kamera auto-off)
+
+-   `/journal`\
+    Chat jurnal & AI
+
+-   `/history`\
+    Grafik mood & riwayat aktivitas
 
 ------------------------------------------------------------------------
 
