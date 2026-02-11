@@ -1,14 +1,21 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 'use client';
 import { useState, useRef, useEffect } from 'react';
 import { fetchWithAuth } from '@/utils/api';
-import { ArrowLeft, Send, Sparkles, User, Bot, RefreshCcw } from 'lucide-react';
+import { ArrowLeft, Send, Sparkles, User, Bot, RefreshCcw, Eye } from 'lucide-react';
 import { useRouter } from 'next/navigation';
+
+interface JournalResult {
+  mood: string;
+  emotion_score: number;
+  summary: string;
+  journal_id: number;
+  created_at: string;
+}
 
 export default function Journal() {
   const [text, setText] = useState('');
   const [loading, setLoading] = useState(false);
-  const [result, setResult] = useState<any>(null);
+  const [result, setResult] = useState<JournalResult | null>(null);
   const messagesEndRef = useRef<HTMLDivElement>(null);
   const router = useRouter();
 
@@ -46,9 +53,15 @@ export default function Journal() {
     setText('');
   };
 
+  const viewJournalDetail = () => {
+    if (result?.journal_id) {
+      router.push(`/journals/${result.journal_id}`);
+    }
+  };
+
   return (
     <div className="flex-1 flex flex-col bg-slate-50 h-full relative">
-      {/* Header (Konsisten dengan History/Dashboard) */}
+      {/* Header */}
       <div className="bg-white p-6 shadow-sm flex items-center gap-4 sticky top-0 z-20 border-b border-slate-100">
         <button
           onClick={() => router.back()}
@@ -87,7 +100,7 @@ export default function Journal() {
           <div className="flex gap-4 justify-end animate-in slide-in-from-right-2 duration-500">
             <div className="space-y-1 max-w-[85%] flex flex-col items-end">
                <span className="text-[10px] text-slate-400 font-bold mr-1">You</span>
-               <div className="bg-gradient-to-br from-indigo-600 to-violet-600 p-4 rounded-2xl rounded-tr-none shadow-md text-sm text-white leading-relaxed">
+               <div className="bg-linear-to-br from-indigo-600 to-violet-600 p-4 rounded-2xl rounded-tr-none shadow-md text-sm text-white leading-relaxed">
                 {text}
               </div>
             </div>
@@ -105,8 +118,8 @@ export default function Journal() {
             </div>
             <div className="bg-white p-4 rounded-2xl rounded-tl-none shadow-sm border border-slate-100 flex items-center gap-2">
                 <span className="w-2 h-2 bg-slate-400 rounded-full animate-bounce"></span>
-                <span className="w-2 h-2 bg-slate-400 rounded-full animate-bounce delay-100"></span>
-                <span className="w-2 h-2 bg-slate-400 rounded-full animate-bounce delay-200"></span>
+                <span className="w-2 h-2 bg-slate-400 rounded-full animate-bounce" style={{ animationDelay: '0.1s' }}></span>
+                <span className="w-2 h-2 bg-slate-400 rounded-full animate-bounce" style={{ animationDelay: '0.2s' }}></span>
             </div>
            </div>
         )}
@@ -126,7 +139,8 @@ export default function Journal() {
                     <div className={`px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider flex items-center gap-2
                         ${result.mood === 'senang' ? 'bg-green-100 text-green-700' : 
                           result.mood === 'sedih' ? 'bg-blue-100 text-blue-700' :
-                          result.mood === 'marah' ? 'bg-red-100 text-red-700' : 'bg-slate-100 text-slate-600'}`}>
+                          result.mood === 'marah' ? 'bg-red-100 text-red-700' :
+                          result.mood === 'stres' ? 'bg-orange-100 text-orange-700' : 'bg-slate-100 text-slate-600'}`}>
                         {result.mood === "senang" ? "🥰 Happy" : 
                          result.mood === "sedih" ? "😢 Sad" : 
                          result.mood === "marah" ? "🤬 Angry" : 
@@ -140,14 +154,23 @@ export default function Journal() {
                 </p>
               </div>
 
-              {/* Action Button */}
-              <button
-                onClick={handleReset}
-                className="flex items-center gap-2 text-xs font-bold text-slate-400 hover:text-indigo-600 transition pl-1 pt-1"
-              >
-                <RefreshCcw size={14} />
-                Curhat lagi dong
-              </button>
+              {/* Action Buttons */}
+              <div className="flex gap-2">
+                <button
+                  onClick={handleReset}
+                  className="flex items-center gap-2 text-xs font-bold text-slate-400 hover:text-indigo-600 transition pl-1 pt-1"
+                >
+                  <RefreshCcw size={14} />
+                  Curhat lagi dong
+                </button>
+                <button
+                  onClick={viewJournalDetail}
+                  className="flex items-center gap-2 text-xs font-bold text-slate-400 hover:text-violet-600 transition pl-1 pt-1"
+                >
+                  <Eye size={14} />
+                  Lihat Detail
+                </button>
+              </div>
             </div>
           </div>
         )}
@@ -161,7 +184,7 @@ export default function Journal() {
         <div className="p-4 md:p-6 bg-white border-t border-slate-100 shadow-[0_-4px_6px_-1px_rgba(0,0,0,0.02)] z-20">
           <div className="relative group">
             <textarea
-              className="w-full bg-slate-50 rounded-2xl p-4 pr-14 text-sm outline-none focus:bg-white focus:ring-2 focus:ring-indigo-500/50 focus:border-indigo-500 transition-all resize-none h-[80px] border border-slate-200 placeholder:text-slate-400"
+              className="w-full bg-slate-50 rounded-2xl p-4 pr-14 text-sm outline-none focus:bg-white focus:ring-2 focus:ring-indigo-500/50 focus:border-indigo-500 transition-all resize-none h-20 border border-slate-200 placeholder:text-slate-400"
               placeholder="Ketik curhatan lo di sini..."
               value={text}
               onChange={(e) => setText(e.target.value)}

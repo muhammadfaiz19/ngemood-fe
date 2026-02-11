@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 "use client";
 import { useEffect, useState } from "react";
 import Link from "next/link";
@@ -10,13 +9,28 @@ import {
   LogOut,
   Loader2,
   Sparkles,
+  FileText,
 } from "lucide-react";
 import Cookies from "js-cookie";
 import { useRouter } from "next/navigation";
+import Image from "next/image";
+
+interface User {
+  id: number;
+  email: string;
+  name?: string;
+  picture?: string;
+  auth_provider: 'email' | 'google';
+}
+
+interface Recommendation {
+  dominant_mood: string;
+  recommendation: string[];
+}
 
 export default function Dashboard() {
-  const [user, setUser] = useState<any>(null);
-  const [recom, setRecom] = useState<any>(null);
+  const [user, setUser] = useState<User | null>(null);
+  const [recom, setRecom] = useState<Recommendation | null>(null);
   const router = useRouter();
 
   useEffect(() => {
@@ -24,6 +38,7 @@ export default function Dashboard() {
       .then((res) => res.json())
       .then(setUser)
       .catch(() => {});
+    
     fetchWithAuth("/moods/recommendation")
       .then((res) => res.json())
       .then(setRecom)
@@ -35,19 +50,38 @@ export default function Dashboard() {
     router.push("/login");
   };
 
+  const getUserDisplay = () => {
+    if (!user) return "Kawan";
+    if (user.name) return user.name.split(' ')[0]; // First name only
+    return user.email.split("@")[0];
+  };
+
   return (
     <div className="flex-1 flex flex-col bg-slate-50 h-full overflow-hidden">
       {/* Navbar */}
       <header className="bg-white p-6 md:px-10 flex justify-between items-center border-b border-slate-100">
-        <div>
-          <h1 className="font-bold text-slate-800 text-lg">
-            Hai, {user ? user.email.split("@")[0] : "Kawan"}! 👋
-          </h1>
-          <p className="text-xs text-slate-400">Semoga hari lo gak suram.</p>
+        <div className="flex items-center gap-4">
+          {/* Profile Picture (Google) */}
+          {user?.picture && (
+            <Image
+              src={user.picture}
+              alt={user.name || user.email}
+              width={48}
+              height={48}
+              className="rounded-full border-2 border-indigo-100"
+            />
+          )}
+          <div>
+            <h1 className="font-bold text-slate-800 text-lg">
+              Hai, {getUserDisplay()}! 👋
+            </h1>
+            <p className="text-xs text-slate-400">Semoga hari lo gak suram.</p>
+          </div>
         </div>
         <button
           onClick={logout}
           className="p-2 text-slate-400 hover:text-red-500 hover:bg-red-50 rounded-full transition"
+          title="Logout"
         >
           <LogOut size={20} />
         </button>
@@ -57,7 +91,7 @@ export default function Dashboard() {
       <main className="flex-1 overflow-y-auto p-6 md:p-10">
         <div className="max-w-4xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-6">
           {/* Insight Card (Big) */}
-          <div className="bg-gradient-to-br from-indigo-600 to-purple-700 text-white p-6 rounded-[2rem] shadow-xl shadow-indigo-200 relative overflow-hidden md:col-span-1 md:row-span-2 flex flex-col justify-between min-h-[300px]">
+          <div className="bg-linear-to-br from-indigo-600 to-purple-700 text-white p-6 rounded-4xl shadow-xl shadow-indigo-200 relative overflow-hidden md:col-span-1 md:row-span-2 flex flex-col justify-between min-h-75">
             <div className="absolute top-0 right-0 w-48 h-48 bg-white/10 rounded-full blur-3xl -mr-10 -mt-10"></div>
             <div>
               <div className="flex items-center gap-2 mb-4 bg-white/20 w-fit px-3 py-1 rounded-full backdrop-blur-md border border-white/10">
@@ -98,7 +132,7 @@ export default function Dashboard() {
           <div className="grid grid-cols-2 gap-4">
             <Link
               href="/face-checkin"
-              className="bg-white p-5 rounded-[2rem] shadow-sm border border-slate-100
+              className="bg-white p-5 rounded-4xl shadow-sm border border-slate-100
              hover:border-indigo-500 hover:shadow-md transition
              flex flex-col items-center justify-center text-center gap-3 group h-full"
             >
@@ -115,7 +149,7 @@ export default function Dashboard() {
 
             <Link
               href="/journal"
-              className="bg-white p-5 rounded-[2rem] shadow-sm border border-slate-100
+              className="bg-white p-5 rounded-4xl shadow-sm border border-slate-100
              hover:border-teal-500 hover:shadow-md transition
              flex flex-col items-center justify-center text-center gap-3 group h-full"
             >
@@ -131,18 +165,18 @@ export default function Dashboard() {
             </Link>
           </div>
 
-          {/* History Button */}
+          {/* Journals History Button - NEW */}
           <Link
-            href="/history"
-            className="bg-white p-6 rounded-[2rem] shadow-sm border border-slate-100 flex items-center justify-between hover:bg-slate-50 transition group"
+            href="/journals"
+            className="bg-white p-6 rounded-4xl shadow-sm border border-slate-100 flex items-center justify-between hover:bg-slate-50 transition group"
           >
             <div className="flex items-center gap-4">
-              <div className="w-12 h-12 bg-orange-50 rounded-2xl flex items-center justify-center text-orange-500">
-                <BarChart2 size={24} />
+              <div className="w-12 h-12 bg-violet-50 rounded-2xl flex items-center justify-center text-violet-500">
+                <FileText size={24} />
               </div>
               <div className="text-left">
-                <h3 className="font-bold text-slate-800">Riwayat</h3>
-                <p className="text-xs text-slate-400">Cek grafik emosi lo</p>
+                <h3 className="font-bold text-slate-800">Jurnal Saya</h3>
+                <p className="text-xs text-slate-400">Lihat semua curhatan</p>
               </div>
             </div>
             <div className="w-10 h-10 rounded-full border border-slate-200 flex items-center justify-center group-hover:bg-slate-800 group-hover:text-white transition">
@@ -150,6 +184,26 @@ export default function Dashboard() {
             </div>
           </Link>
         </div>
+
+        {/* History Button */}
+        <Link
+          href="/history"
+          className="bg-white p-6 mt-6 rounded-4xl shadow-sm border border-slate-100 flex items-center justify-between hover:bg-slate-50 transition group"
+        >
+          <div className="flex items-center gap-4">
+            <div className="w-12 h-12 bg-orange-50 rounded-2xl flex items-center justify-center text-orange-500">
+              <BarChart2 size={24} />
+            </div>
+            <div className="text-left">
+              <h3 className="font-bold text-slate-800">Riwayat Mood</h3>
+              <p className="text-xs text-slate-400">Cek grafik emosi lo</p>
+            </div>
+          </div>
+          <div className="w-10 h-10 rounded-full border border-slate-200 flex items-center justify-center group-hover:bg-slate-800 group-hover:text-white transition">
+            ➜
+          </div>
+        </Link>
+        
       </main>
     </div>
   );
